@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Dashboard</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <div class="cntrl_opt">
+      <p class="title">Welcome to Dashboard</p>
+      <p id="name" class="sub_title">
+        <%= test %>
+      </p>
+      <div class="links_div">
+        <li><a href="/index.ejs" class="links">General</a></li>
+        <li><a href="/order.ejs" class="links">Order</a></li>
+        <li><a href="/Message.ejs" class="links active">Message</a></li>
+        <li><a href="/Setting.ejs" class="links">Setting</a></li>
+      </div>
+    </div>
+    <div class="cntrl_details">
+      <p class="title_details">Chat Care</p>
+      <p style="margin: 10px; color: #d2d2d2;">For better Experience Contect Us via Number or Email</p>
+      <div class="chat">
+        <div id="chatwindow">
+          <div id="output"></div>
+        </div>
+        <div id="feedback"></div>
+        <input type="text" id="message" placeholder="message" />
+        <button class="btn" id="send">Send</button>
+      </div>
+    </div>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: Montserrat;
+        list-style: none;
+      }
+
+      @media screen and (max-width: 1040px) {
+        body {
+          background-color: #282c34;
+        }
+
+        .cntrl_opt {
+          background-color: #fff;
+          text-align: center;
+          letter-spacing: 1px;
+        }
+        .links_div li {
+          display: inline-block;
+          margin: 10px 20px;
+        }
+      }
+      @media screen and (min-width: 1041px) {
+        body {
+          display: flex;
+          background-color: #282c34;
+        }
+
+        .cntrl_opt {
+          width: 25%;
+          height: 100vh;
+          position: sticky;
+          top: 0;
+          background-color: #fff;
+          text-align: center;
+          letter-spacing: 1px;
+        }
+        .active {
+          background-color: #444;
+        }
+              .links:hover {
+        color: #d2d2d2;
+        background-color: #444;
+      }
+      }
+
+      .title {
+        color: #444;
+        font-size: 20px;
+        padding: 50px 20px 50px 20px;
+        font-weight: 600;
+      }
+
+      .sub_title {
+        font-size: 25px;
+        padding: 20px;
+        color: #444;
+        font-weight: 600;
+        font-family: "Dancing Script";
+        letter-spacing: 2px;
+      }
+
+      .links {
+        display: block;
+        text-decoration: none;
+        padding: 20px 0px;
+        color: #fff;
+        letter-spacing: 2px;
+      }
+
+
+
+      .links_div {
+        margin-top: 50px;
+        background-color: #282c34;
+        padding: 50px 0px;
+      }
+
+      .cntrl_details {
+        width: 75%;
+        margin: 70px auto;
+        color: #fff;
+        text-align: center;
+      }
+
+      .title_details {
+        font-size: 25px;
+        letter-spacing: 2px;
+      }
+
+      .chat {
+        margin: 70px 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        color: #444;
+      }
+      #message {
+        width: 100%;
+        height: 80px;
+        border: none;
+        text-align: center;
+        font-size: 17px;
+        color: #000;
+      }
+      .btn {
+        background-color: #4d5ac9;
+        border: none;
+        width: 100%;
+        color: #fff;
+        font-size: 17px;
+        letter-spacing: 1px;
+        cursor: pointer;
+        height: 40px;
+      }
+      .btn:hover {
+        background-color: #444;
+      }
+      #output {
+        height: 300px;
+        overflow-y: scroll;
+        font-size: 17px;
+        font-family: sans-serif;
+        text-align: left;
+        padding: 50px;
+        background-color: #4488bb;
+      }
+      #output::-webkit-scrollbar {
+        display: none;
+      }
+      #output P {
+        color: #000;
+        font-size: 17px;
+        margin: 5px;
+        letter-spacing: 1px;
+      }
+      .msg_title {
+        margin-right: 10px;
+        font-size: 16px;
+        font-family: sans-serif;
+        color: #fff;
+        text-transform: capitalize;
+        letter-spacing: 2px;
+      }
+      .msg_act {
+        color: #000;
+        text-align: center;
+        border-radius: 3px;
+        font-size: 17px;
+        letter-spacing: 2px;
+        margin-bottom: 50px;
+      }
+      #feedback {
+        padding: 5px 0px;
+        width: 100%;
+        background-color: #4488bb;
+        color: #444;
+      }
+    </style>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"
+      integrity="sha256-OgiHfllOBEOiWQ2OcBsDncRG2k7QBW9Rs1dB7MH2N2s="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      const username = document.getElementById('name').innerText
+      const socket = io();
+      socket.on("message", (message) => {
+        document.querySelector("#output").innerHTML +=
+          "<p> " + '<div class="msg_act">' + message + "</div>";
+      });
+      document.querySelector("#send").addEventListener("click", (data) => {
+        data.preventDefault();
+        const message = document.querySelector("#message").value;
+        document.querySelector("#message").value = "";
+        document.querySelector("#message").focus();
+        const handle = username;
+        socket.emit("chat", {
+          message: message,
+          handle: handle,
+        });
+      });
+
+      document.querySelector("#message").addEventListener("keypress", () => {
+        const handle = username;
+        socket.emit("typing", handle);
+      });
+
+      socket.on("chat", (data) => {
+        document.querySelector("#output").scrollTop = document.querySelector(
+          "#output"
+        ).scrollHeight;
+        document.querySelector("#feedback").innerHTML = "";
+        document.querySelector("#output").innerHTML +=
+          "<p> " +
+          '<span class="msg_title">' +
+          data.handle +
+          " : " +
+          "</span>" +
+          data.message +
+          "</P>";
+      });
+
+      socket.on("typing", (data) => {
+        document.querySelector("#feedback").innerHTML =
+          "<p><em> " + data + " is typing a message...</em></p>";
+      });
+    </script>
+  </body>
+</html>

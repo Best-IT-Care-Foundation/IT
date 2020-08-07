@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <p class="title">Welcome To Admin Page</p>
+    <p class="title">Active Order</p>
+      <ul>
+  <% for (var i=0; i<test.length; i++){ %>
+    <li style="margin: 10px; font-size:18px; color:lightgreen;letter-spacing:2px;">
+      <span ><%=test2[i]%></span>
+    </li>
+<form method="POST">
+              <select name="service" id="service">
+                <option value="Pending">Pending</option>
+                <option value="Eject">Eject</option>
+                <option value="Completed">Completed</option>
+                </select>
+                <input style="display: none;" name="id" type="text" value=<%=test[i]%>>
+                <input type="submit" value="Change" />
+</form>
+  <% } %>
+      </ul>
+
+    <div class="msg_sec">
+      <p class="title">Message</p>
+    <div class="cntrl_details">
+      <p class="title_details">Chat Care</p>
+      <p style="margin: 10px; color: #d2d2d2;">For better Experience Contect Us via Number or Email</p>
+      <div class="chat">
+        <div id="chatwindow">
+          <div id="output"></div>
+        </div>
+        <div id="feedback"></div>
+        <input type="text" id="message" placeholder="message" />
+        <button class="btn" id="send">Send</button>
+      </div>
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <style>
+      .id{
+        padding:10px;
+        border:none;
+        margin:10px;
+        width:200px;
+        text-align: center;
+        cursor: not-allowed;
+      }
+
+      .title_details {
+        font-size: 25px;
+        letter-spacing: 2px;
+        color: lightgreen;
+      }
+
+      .chat {
+        margin: 70px 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        color: #444;
+      }
+      #message {
+        width: 100%;
+        height: 80px;
+        border: none;
+        text-align: center;
+        font-size: 17px;
+        color: #000;
+      }
+      .btn {
+        background-color: #4d5ac9;
+        border: none;
+        width: 100%;
+        color: #fff;
+        font-size: 17px;
+        letter-spacing: 1px;
+        cursor: pointer;
+        height: 40px;
+      }
+      .btn:hover {
+        background-color: #444;
+      }
+      #output {
+        height: 300px;
+        overflow-y: scroll;
+        font-size: 17px;
+        font-family: sans-serif;
+        text-align: left;
+        padding: 50px;
+        background-color: #4488bb;
+      }
+      #output::-webkit-scrollbar {
+        display: none;
+      }
+      #output P {
+        color: #000;
+        font-size: 17px;
+        margin: 5px;
+        letter-spacing: 1px;
+      }
+      .msg_title {
+        margin-right: 10px;
+        font-size: 16px;
+        font-family: sans-serif;
+        color: #fff;
+        text-transform: capitalize;
+        letter-spacing: 2px;
+      }
+      .msg_act {
+        color: #000;
+        text-align: center;
+        border-radius: 3px;
+        font-size: 17px;
+        letter-spacing: 2px;
+        margin-bottom: 50px;
+      }
+      #feedback {
+        padding: 5px 0px;
+        width: 100%;
+        background-color: #4488bb;
+        color: #444;
+      }
+      .btna a {
+        margin: 10px;
+        color: #d2d2d2;
+        text-decoration:none;
+        padding:5px;
+        border: 1px solid #fff;
+        border-radius:3px;
+      }
+      .btna a:hover{
+background-color: #fff;
+color: #000;
+      }
+      .order_sec{
+        margin:50px 0px;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: Montserrat;
+      }
+      .des{
+        color: #d2d2d2;
+        font-size: 17px;
+        letter-spacing: 1px;
+      }
+      .ru_n{
+        color: lightgreen;
+      }
+      body {
+        background-color: #29303b;
+        text-align: center;
+      }
+      .title {
+        font-size: 25px;
+        margin: 50px 20px;
+        color: #fff;
+        letter-spacing: 2px;
+        text-align: center;
+      }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"
+      integrity="sha256-OgiHfllOBEOiWQ2OcBsDncRG2k7QBW9Rs1dB7MH2N2s=" crossorigin="anonymous"></script>
+    <script>
+      const socket = io();
+      socket.on("message", (message) => {
+        document.querySelector("#output").innerHTML +=
+          "<p> " + '<div class="msg_act">' + message + "</div>";
+      });
+      document.querySelector("#send").addEventListener("click", (data) => {
+        data.preventDefault();
+        const message = document.querySelector("#message").value;
+        document.querySelector("#message").value = "";
+        document.querySelector("#message").focus();
+        const handle = "Admin";
+        socket.emit("chat", {
+          message: message,
+          handle: handle,
+        });
+      });
+
+      document.querySelector("#message").addEventListener("keypress", () => {
+        const handle = "Admin";
+        socket.emit("typing", handle);
+      });
+
+      socket.on("chat", (data) => {
+        document.querySelector("#output").scrollTop = document.querySelector(
+          "#output"
+        ).scrollHeight;
+        document.querySelector("#feedback").innerHTML = "";
+        document.querySelector("#output").innerHTML +=
+          "<p> " +
+          '<span class="msg_title">' +
+          data.handle +
+          " : " +
+          "</span>" +
+          data.message +
+          "</P>";
+      });
+
+      socket.on("typing", (data) => {
+        document.querySelector("#feedback").innerHTML =
+          "<p><em> " + data + " is typing a message...</em></p>";
+      });
+    </script>
+  </body>
+</html>

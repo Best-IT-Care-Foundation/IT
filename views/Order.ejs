@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Dashboard</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+
+  <body>
+    <div class="cntrl_opt">
+      <p class="title">Welcome to Dashboard</p>
+      <p class="sub_title">
+        <%= test %>
+      </p>
+      <div class="links_div">
+        <li><a href="/index.ejs" class="links">General</a></li>
+        <li><a href="/order.ejs" class="links active">Order</a></li>
+        <li><a href="/Message.ejs" class="links">Message</a></li>
+        <li><a href="/Setting.ejs" class="links">Setting</a></li>
+      </div>
+    </div>
+    <div class="cntrl_details">
+      <div class="succeed">
+        <div class="ordr_ctnt">
+          <p class="ordr_title">Succeed Order</p>
+          <p class="ordr_num_S"><%= test0 %></p>
+        </div>
+      </div>
+      <div class="Pending">
+        <div class="ordr_ctnt">
+          <p class="ordr_title">Pending Order</p>
+          <p class="ordr_num_P"><%= test1 %></p>
+        </div>
+      </div>
+      <div class="Cancel">
+        <div class="ordr_ctnt">
+          <p class="ordr_title">Canceled Order</p>
+          <p class="ordr_num_C"><%= test2 %></p>
+        </div>
+      </div>
+
+      <div class="ordr_now">
+        <p class="ordr_now_title">
+          Order Now
+        </p>
+        <form method="POST">
+          <div>
+            <p class="select_srvc">Select Your Service</p>
+            <select name="service" id="service">
+              <option value="Web Design And Development">Web Design And Development</option>
+              <option value="Graphic Design">Graphic Design</option>
+              <option value="SEO Services">SEO Services</option>
+              <option value="Youtube Service">Youtube Service</option>
+              <option value="Digital Marketing">Digital Marketing</option>
+              <option value="Domain Hosting Services">Domain Hosting Services</option>
+              <option value="Video Editing">Video Editing</option>
+              <option value="Content Writing">Content Writing</option>
+              <option value="Software Development">Software Development</option>
+            </select>
+          </div>
+          <input type="submit" value="Order" />
+        </form>
+        <div class="order_des">
+          <span class="order_des_t">Note :</span>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio
+          consequuntur rem fugit eaque maxime cupiditate tempore voluptas et
+          soluta a sed nesciunt error itaque nisi dignissimos velit doloremque
+          iusto totam ab nulla incidunt aspernatur, tempora sint! Hic pr
+        </div>
+      </div>
+
+      <div class="ordr_history">
+        <p class="ordr_history_title">
+          Order History
+        </p>
+      </div>
+    </div>
+  </body>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: Montserrat;
+      list-style: none;
+    }
+      @media screen and (max-width: 1040px) {
+        body {
+          background-color: #282c34;
+        }
+
+        .cntrl_opt {
+          background-color: #fff;
+          text-align: center;
+          letter-spacing: 1px;
+        }
+        .links_div li {
+          display: inline-block;
+          margin: 10px 20px;
+        }
+      }
+      @media screen and (min-width: 1041px) {
+        body {
+          display: flex;
+          background-color: #282c34;
+        }
+
+        .cntrl_opt {
+          width: 25%;
+          height: 100vh;
+          position: sticky;
+          top: 0;
+          background-color: #fff;
+          text-align: center;
+          letter-spacing: 1px;
+        }
+        .active {
+          background-color: #444;
+        }
+              .links:hover {
+        color: #d2d2d2;
+        background-color: #444;
+      }
+      }
+    .title {
+      color: #444;
+      font-size: 20px;
+      padding: 50px 20px 50px 20px;
+      font-weight: 600;
+    }
+
+    .sub_title {
+      font-size: 25px;
+      padding: 20px;
+      color: #444;
+      font-weight: 600;
+      font-family: "Dancing Script";
+      letter-spacing: 2px;
+    }
+
+    .links {
+      display: block;
+      text-decoration: none;
+      padding: 20px 0px;
+      color: #fff;
+      letter-spacing: 2px;
+    }
+
+
+    .links_div {
+      margin-top: 50px;
+      background-color: #282c34;
+      padding: 50px 0px;
+    }
+
+    .cntrl_details {
+      width: 75%;
+      margin: 70px auto;
+      color: #fff;
+      text-align: center;
+    }
+    .succeed,
+    .Pending,
+    .Cancel {
+      width: 150px;
+      height: 100px;
+      margin: 20px 50px;
+      display: inline-block;
+    }
+    .ordr_ctnt {
+      position: relative;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .ordr_title {
+      font-size: 17px;
+      margin-bottom: 30px;
+      letter-spacing: 1px;
+    }
+    .ordr_num_C {
+      color: #ffa500;
+    }
+    .ordr_num_S {
+      color: #90ee90;
+    }
+    .ordr_num_P {
+      color: #77d8d8;
+    }
+    .ordr_history_title,
+    .ordr_now_title {
+      font-size: 30px;
+      margin: 50px 0px 50px 0px;
+      letter-spacing: 2px;
+    }
+    form select {
+      padding: 10px 20px;
+      color: #000;
+      background-color: #90ee90;
+      border-radius: 5px;
+      border: none;
+      font-family: sans-serif;
+      font-size: 15px;
+      letter-spacing: 1px;
+    }
+    form input {
+      padding: 10px 20px;
+      font-size: 15px;
+      letter-spacing: 1px;
+      border-radius: 3px;
+      border: 1px solid #fff;
+      background-color: transparent;
+      color: #fff;
+      font-weight: 400;
+      cursor: pointer;
+      font-family: sans-serif;
+    }
+    form input:hover {
+      background-color: #444;
+      border: 1px solid transparent;
+    }
+    form div,
+    input {
+      display: inline-block;
+      margin: 20px 5px;
+    }
+    .select_srvc {
+      line-height: 40px;
+      font-size: 16px;
+      letter-spacing: 1px;
+    }
+    .order_des {
+      font-size: 16px;
+      line-height: 30px;
+      padding: 20px 50px;
+      color: #d2d2d2;
+    }
+    .order_des_t {
+      color: yellow;
+    }
+  </style>
+</html>

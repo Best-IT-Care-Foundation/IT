@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Dashboard</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+
+  <body>
+    <div class="cntrl_opt">
+      <p class="title">Welcome to Dashboard</p>
+      <p class="sub_title">
+        <%= test %>
+      </p>
+      <div class="links_div">
+        <li><a href="/index.ejs" class="links">General</a></li>
+        <li><a href="/order.ejs" class="links">Order</a></li>
+        <li><a href="/Message.ejs" class="links">Message</a></li>
+        <li><a href="/Setting.ejs" class="links active">Setting</a></li>
+      </div>
+    </div>
+    <div class="cntrl_details">
+      <p class="title_details">Setting</p>
+      <p class="des_details">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus labore
+        corporis dolores architecto obcaecati laborum ab ad asperiores, quasi
+        blanditiis possimus cum facere nobis porro maxime exercitationem magni
+        voluptates, inventore non, soluta eos. Quos nesciunt, atque pariatur
+        maiores animi quaerat amet eaque id ea aperiam aspernatur nemo, eos illo
+        totam.
+      </p>
+
+
+
+
+
+
+
+
+
+
+      <form class="changeName" method="POST">
+      
+      
+        <input name="CN" class="CN" type="text" required placeholder="Enter Your new Name Here : ">
+        <input class="btn" type="submit" value="Change">
+      
+      
+      </form>
+      <form class="changeEmail" method="POST">
+      
+      
+        <input name="CE" class="CE" type="text"  required placeholder="Enter Your new Email Here : ">
+        <input class="btn" type="submit" value="Change">
+      
+      
+      </form>
+      <form class="changePass" method="POST">
+      
+      
+        <input name="CP" class="CP" type="text" required placeholder="Enter Your Password  Here : ">
+        <input class="btn" type="submit" value="Change">
+      
+      
+      </form>
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </body>
+
+  <style>
+    .CN,.CE,.CP{
+      height:30px;
+      width:300px;
+      border:none;
+      border-radius:2px;
+      text-align: center;
+      margin:10px;
+
+    }
+    .btn{
+      height:30px;
+      width:100px;
+      border:none;
+      border-radius:2px;
+      cursor: pointer;
+
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: Montserrat;
+      list-style: none;
+    }
+    @media screen and (min-width: 1041px) {
+      body {
+        display: flex;
+        background-color: #282c34;
+      }
+
+      .cntrl_opt {
+        width: 25%;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+        background-color: #fff;
+        text-align: center;
+        letter-spacing: 1px;
+      }
+      .active {
+        background-color: #444;
+      }
+            .links:hover {
+        color: #d2d2d2;
+        background-color: #444;
+      }
+    }
+    @media screen and (max-width: 1040px) {
+      body {
+        background-color: #282c34;
+      }
+      .links_div li {
+        display: inline-block;
+        margin: 10px 20px;
+      }
+      .cntrl_opt {
+        background-color: #fff;
+        text-align: center;
+        letter-spacing: 1px;
+      }
+    }
+
+    .title {
+      color: #444;
+      font-size: 20px;
+      padding: 50px 20px 50px 20px;
+      font-weight: 600;
+    }
+
+    .sub_title {
+      font-size: 25px;
+      padding: 20px;
+      color: #444;
+      font-weight: 600;
+      font-family: "Dancing Script";
+      letter-spacing: 2px;
+    }
+
+    .links {
+      display: block;
+      text-decoration: none;
+      padding: 20px 0px;
+      color: #fff;
+      letter-spacing: 2px;
+    }
+    .links_div {
+      margin-top: 50px;
+      background-color: #282c34;
+      padding: 50px 0px;
+    }
+
+    .cntrl_details {
+      width: 75%;
+      margin: 70px auto;
+      color: #fb7813;
+      text-align: center;
+    }
+
+    .title_details {
+      font-size: 25px;
+      letter-spacing: 2px;
+    }
+
+    .des_details {
+      padding: 50px;
+      line-height: 30px;
+      font-size: 17px;
+      color: #fb7813;
+    }
+  </style>
+</html>
